@@ -1,0 +1,15 @@
+:root {
+    font-family: HK Grotesk,Helvetica Neue,arial,sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #15141a;
+    background-color: #f6f5f2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+}

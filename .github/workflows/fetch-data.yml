@@ -1,0 +1,74 @@
+name: update and deploy
+
+on:
+  schedule:
+    - cron: "* */6 * * *"
+  push:
+    branches:
+      - main
+
+jobs:
+  fetch-data:
+    env: 
+      IT_USER: ${{ secrets.ITALIC_TYPE_USERNAME }}
+      IT_PASSWORD: ${{ secrets.ITALIC_TYPE_PASSWORD }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Install dependencies
+        run: npm ci --prefix backend
+      
+      - name: Generate output file
+        run: node backend/update.js
+      
+      - name: Commit output file to main branch
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          message: "update public_data"
+          add: "./src/assets/public_data.json"
+          branch: main
+          signoff: true
+
+  build:
+    needs: fetch-data
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: production-files
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
