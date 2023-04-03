@@ -1,43 +1,31 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Fetch ItalicType Data
+name: Fetch italictype data
 
 on:
-  push:
-    branches: [ "update" ]
-  pull_request:
-    branches: [ "update" ]
+schedule:
+  - cron: "0 */12 * * *"
 
 jobs:
-  update:
+  fetch-data:
     env: 
       IT_USER: ${{ secrets.ITALIC_TYPE_USERNAME }}
       IT_PASSWORD: ${{ secrets.ITALIC_TYPE_PASSWORD }}
     
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Set up node
+    - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
         cache: 'npm'
+    - run: cd ./backend
     - run: npm ci
     - run: node update.js
-    - name: Commit update
-      run: |
-        git pull
-        git config --local user.email "action@github.com"
-        git config --local user.name "github-actions"
-        git add public_data.json
-        git commit -m "Fetched user data"
-      shell: bash
-    - name: Push update
-      uses: ad-m/github-push-action@master
+    - run: cd ..
+    - name: Commit updated public_data.json
+      uses: EndBug/add-and-commit@v7
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: update
-        
-        
+        default_author: github_actions
+        message: "update public_data.json"
+        add: "./src/assets/public_data.json"
+        signoff: true

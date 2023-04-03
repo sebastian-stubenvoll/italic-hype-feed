@@ -2,7 +2,7 @@
     import InfiniteLoading from 'svelte-infinite-loading';
     import Card from './components/Card.svelte';
     import BackToTop from './components/BackToTop.svelte';
-    import public_data from '../backend/public_data.json';
+    import public_data from './assets/public_data.json';
     import { onMount } from 'svelte';
     import { fly } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';

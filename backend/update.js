@@ -18,7 +18,7 @@ async function update() {
         completed : filters.completed(data.queues[1]),
     };
     
-    fs.writeFileSync('./public_data.json', JSON.stringify(public_data));
+    fs.writeFileSync('../src/assets/public_data.json', JSON.stringify(public_data));
 }
 
 update();
