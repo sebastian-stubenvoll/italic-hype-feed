@@ -4,10 +4,13 @@
     import BackToTop from './components/BackToTop.svelte';
     import public_data from './assets/public_data.json';
     import { onMount } from 'svelte';
-    import { fly } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
+    import ToggleAbout from './components/ToggleAbout.svelte';
+    import AboutSection from './components/AboutSection.svelte';
 
     let init = false;
+    let openAbout = false;
 
     let display = [...public_data.current];
     
@@ -26,7 +29,17 @@
 
 </script>
 
-<div class="container">
+<div class="about-container" style="z-index:99">
+<ToggleAbout bind:openAbout />
+</div>
+
+{#if openAbout}
+    <div class="about-container" transition:fade>
+        <AboutSection name={public_data.name} />
+    </div>
+{:else}
+
+<div class="feed-container" transition:fade>
     <div class="grid">
         <div>
             <img class="avatar" src="{public_data.avatar}">
@@ -52,17 +65,24 @@
     <span slot="noResults" />
 </InfiniteLoading>
 
+{/if}
+
 
 <style>
+    .about-container {
+        position: fixed;
+        z-index: 98;
+    }
+
     @media (min-width: 600px) {
-        .container {
+        .feed-container {
             margin-left: 19% !important;
             width: 81% !important;
             align-items: flex-start !important;
         }
     }
 
-    .container {
+    .feed-container {
         margin: 0 auto;
         margin-top: 10px;
         width: 100%;
