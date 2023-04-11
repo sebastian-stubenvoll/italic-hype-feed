@@ -3,7 +3,7 @@ A display feed for your recently read (and current) books, using your italictype
 data. It updates four times a day. Feel free to check it out on [github pages](https://sebastian-stubenvoll.github.io/italic-hype-feed/)!
 Built with vite and svelte.
 
-**This is in no way or form officially affiliated with italic type**
+**This is in no way or form officially affiliated with italictype**
 (though their book tracker is awesome, you should [sign up](https://www.italictype.com/) if you haven't!)
 
 ## Setup
@@ -30,7 +30,7 @@ having unique password on different websites and stay safe! :)
    know what this does (or haven't set up a custom domain for your gh-pages
    site) simply delete the whole line.
 
-I may set up a *clone me* branch in the near future to simply this process a
+I may set up a *clone-me* branch in the near future to simplify this process a
 little.
 
 Github Actions will then periodically run a script that obtains your
