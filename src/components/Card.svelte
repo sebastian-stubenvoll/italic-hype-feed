@@ -40,7 +40,7 @@
             <div class="info">
                 <div class="title" title="{title}">{title}</div>
                 <div class="authors">{@html joinAuthors(authors)}</div>
-                {#if at_page}
+                {#if !completed && pages}
                     <div class="pages">{pages} pages</div>
                 {/if}
             </div>
@@ -50,7 +50,7 @@
                 {/if}
                 {#if rating}
                     rated <i>{rating}</i>
-                {:else}
+                {:else if at_page}
                     currently on page <i>{at_page}</i>
                 {/if}
             </div>

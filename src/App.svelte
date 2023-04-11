@@ -13,7 +13,7 @@
     
     function infiniteHandler( { detail : { loaded, complete } }) {
         const start = display.length - public_data.current.length;
-        const new_books = public_data.completed.slice(start, start+4);
+        const new_books = public_data.completed.slice(start, start+10);
         if (new_books.length > 0) {
             display = [...display, ...new_books];
             loaded();
