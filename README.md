@@ -23,6 +23,9 @@ having unique password on different websites and stay safe! :)
 
 4. Under `Actions -> General -> Workflow permissions` grant read and write
    permissions
+5. You may need to uncomment or adjust the `base` entry in `vite.config.js` to
+   match your deployment path. E.g. if you're deploying with the default github
+   pages url, you need to change the entry to `base: '/YOUR-REPO-NAME/'`
 
 
 Github Actions will then periodically run a script that obtains your
