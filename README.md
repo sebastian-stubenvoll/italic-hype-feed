@@ -26,7 +26,12 @@ having unique password on different websites and stay safe! :)
 5. You may need to uncomment or adjust the `base` entry in `vite.config.js` to
    match your deployment path. E.g. if you're deploying with the default github
    pages url, you need to change the entry to `base: '/YOUR-REPO-NAME/'`
+6. In `.github/workflows/fetch-data.yml` adjust the `cname` entry. If you don't
+   know what this does (or haven't set up a custom domain for your gh-pages
+   site) simply delete the whole line.
 
+I may set up a *clone me* branch in the near future to simply this process a
+little.
 
 Github Actions will then periodically run a script that obtains your
 *italictype* data, filters out any sensitive information and writes it to the
