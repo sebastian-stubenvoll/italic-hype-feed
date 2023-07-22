@@ -7,6 +7,7 @@ function completed(arr) {
             pages: x.book.page_count,
             completed : x.finished_reading_at,
             rating : x.user_review.rating,
+            url: x.book.book_detail_url,
         };
         return entry;
     });
@@ -80,6 +81,7 @@ function current(arr) {
             cover : x.book.cover_image_url,
             pages: x.book.page_count,
             at_page: x.current_page_number,
+            url: x.book.book_detail_url,
         };
         return entry;
     });

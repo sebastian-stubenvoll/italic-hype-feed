@@ -27,7 +27,8 @@
 </script>
 
 <div class="container">
-    <div class="grid">
+    <div class="info-container">
+        <div class="buffer" />
         <div>
             <img class="avatar" src="{public_data.avatar}">
         </div>
@@ -54,14 +55,6 @@
 
 
 <style>
-    @media (min-width: 600px) {
-        .container {
-            margin-left: 19% !important;
-            width: 81% !important;
-            align-items: flex-start !important;
-        }
-    }
-
     .container {
         margin: 0 auto;
         margin-top: 10px;
@@ -71,11 +64,17 @@
         flex-direction: column;
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 16px;
-        margin-left: 8px;
+    .info-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 63vw;
+        min-width: 320px;
+        max-width: 700px;
+    }
+
+    .buffer {
+        width: 0;
     }
 
     .avatar {
@@ -85,16 +84,19 @@
         border: 1px white;
         box-shadow: 0 0 20px 1px rgba(43,36,13,.18);
         object-fit: cover;
+        grid-row: 1;
+        margin-left: 22px;
     }
 
     .card {
         margin-top: 8px;
-        margin-bottom: 8;
     }
 
     .name {
         font-family: normal Lora,Times New Roman,Georgia,serif;
         font-size: 150%;
         align-self: center;
+        grid-row: 1;
+        padding-left: 6px;
     }
 </style>
