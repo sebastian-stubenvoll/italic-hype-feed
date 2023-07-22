@@ -1,4 +1,7 @@
 <script>
+    import { infoVisible } from '../stores.js';
+    import { fade } from 'svelte/transition';
+
   export let showOnPx = 150;
   let hidden = true;
 
@@ -22,6 +25,11 @@
     }
   }
 </script>
+
+<svelte:window on:scroll={handleOnScroll} />
+{#if !$infoVisible}
+<button transition:fade={{duration:250}} class="back-to-top" on:click={goTop} class:hidden>↑</button>
+{/if}
 
 <style>
   .back-to-top {
@@ -48,7 +56,4 @@
   }
 </style>
 
-<svelte:window on:scroll={handleOnScroll} />
-
-<button class="back-to-top" on:click={goTop} class:hidden>↑</button>
 

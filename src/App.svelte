@@ -1,7 +1,10 @@
 <script>
     import InfiniteLoading from 'svelte-infinite-loading';
+    import { infoVisible } from './stores.js';
     import Card from './components/Card.svelte';
     import BackToTop from './components/BackToTop.svelte';
+    import ShowInfo from './components/ShowInfo.svelte';
+    import Info from './components/Info.svelte';
     import public_data from './assets/public_data.json';
     import { onMount } from 'svelte';
     import { fly } from 'svelte/transition';
@@ -24,13 +27,16 @@
 
     onMount( () => { init = true });
 
-</script>
+    infoVisible.subscribe((b) => {
+        document.body.style.overflowY = b ? 'hidden' : 'visible';
+    });
 
-<div class="container">
+</script>
+<div class="container" id="feed">
     <div class="info-container">
         <div class="buffer" />
         <div>
-            <img class="avatar" src="{public_data.avatar}">
+            <img class="avatar" src="{public_data.avatar}" alt="avatar">
         </div>
         <div class="name">
             {public_data.name}'{public_data.name.slice(-1) == 's' ? '' : 's'} recent reads
@@ -46,7 +52,13 @@
     {/if}
 </div>
 
+{#if $infoVisible}
+    <Info />
+{/if}
+
+<ShowInfo />
 <BackToTop />
+
 
 <InfiniteLoading on:infinite={infiniteHandler}>
     <span slot="noMore" />
