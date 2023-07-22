@@ -4,19 +4,16 @@
     import BackToTop from './components/BackToTop.svelte';
     import public_data from './assets/public_data.json';
     import { onMount } from 'svelte';
-    import { fly, fade } from 'svelte/transition';
+    import { fly } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
-    import ToggleAbout from './components/ToggleAbout.svelte';
-    import AboutSection from './components/AboutSection.svelte';
 
     let init = false;
-    let openAbout = false;
 
     let display = [...public_data.current];
     
     function infiniteHandler( { detail : { loaded, complete } }) {
         const start = display.length - public_data.current.length;
-        const new_books = public_data.completed.slice(start, start+4);
+        const new_books = public_data.completed.slice(start, start+10);
         if (new_books.length > 0) {
             display = [...display, ...new_books];
             loaded();
@@ -29,18 +26,9 @@
 
 </script>
 
-<div class="about-container" style="z-index:99">
-<ToggleAbout bind:openAbout />
-</div>
-
-{#if openAbout}
-    <div class="about-container" transition:fade>
-        <AboutSection name={public_data.name} />
-    </div>
-{:else}
-
-<div class="feed-container" transition:fade>
-    <div class="grid">
+<div class="container">
+    <div class="info-container">
+        <div class="buffer" />
         <div>
             <img class="avatar" src="{public_data.avatar}">
         </div>
@@ -65,24 +53,9 @@
     <span slot="noResults" />
 </InfiniteLoading>
 
-{/if}
-
 
 <style>
-    .about-container {
-        position: fixed;
-        z-index: 98;
-    }
-
-    @media (min-width: 600px) {
-        .feed-container {
-            margin-left: 19% !important;
-            width: 81% !important;
-            align-items: flex-start !important;
-        }
-    }
-
-    .feed-container {
+    .container {
         margin: 0 auto;
         margin-top: 10px;
         width: 100%;
@@ -91,11 +64,17 @@
         flex-direction: column;
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 16px;
-        margin-left: 8px;
+    .info-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 63vw;
+        min-width: 320px;
+        max-width: 700px;
+    }
+
+    .buffer {
+        width: 0;
     }
 
     .avatar {
@@ -105,16 +84,19 @@
         border: 1px white;
         box-shadow: 0 0 20px 1px rgba(43,36,13,.18);
         object-fit: cover;
+        grid-row: 1;
+        margin-left: 22px;
     }
 
     .card {
         margin-top: 8px;
-        margin-bottom: 8;
     }
 
     .name {
         font-family: normal Lora,Times New Roman,Georgia,serif;
         font-size: 150%;
         align-self: center;
+        grid-row: 1;
+        padding-left: 6px;
     }
 </style>

@@ -3,7 +3,7 @@ A display feed for your recently read (and current) books, using your italictype
 data. It updates four times a day. Feel free to check it out on [github pages](https://sebastian-stubenvoll.github.io/italic-hype-feed/)!
 Built with vite and svelte.
 
-**This is in no way or form officially affiliated with italic type**
+**This is in no way or form officially affiliated with italictype**
 (though their book tracker is awesome, you should [sign up](https://www.italictype.com/) if you haven't!)
 
 ## Setup
@@ -23,7 +23,15 @@ having unique password on different websites and stay safe! :)
 
 4. Under `Actions -> General -> Workflow permissions` grant read and write
    permissions
+5. You may need to uncomment or adjust the `base` entry in `vite.config.js` to
+   match your deployment path. E.g. if you're deploying with the default github
+   pages url, you need to change the entry to `base: '/YOUR-REPO-NAME/'`
+6. In `.github/workflows/fetch-data.yml` adjust the `cname` entry. If you don't
+   know what this does (or haven't set up a custom domain for your gh-pages
+   site) simply delete the whole line.
 
+I may set up a *clone-me* branch in the near future to simplify this process a
+little.
 
 Github Actions will then periodically run a script that obtains your
 *italictype* data, filters out any sensitive information and writes it to the

@@ -8,6 +8,7 @@
     export let pages = null;
     export let separator = false;
     export let label = null;
+    export let url = 'https://www.italictype.com/';
 
     function joinAuthors(arr) {
        if (arr.length < 4) {
@@ -35,12 +36,16 @@
 {:else}
 <main>
     <div class="container-outer">
-        <img class="cover" src="{cover}">
+        <a href="{url}" target="_blank" class="cover-link">
+            <img class="cover" src="{cover}" alt="{title} cover">
+        </a>
         <div class="container-inner">
             <div class="info">
-                <div class="title" title="{title}">{title}</div>
+                <a href="{url}" target="_blank">
+                    <div class="title" title="{title}">{title}</div>
+                </a>
                 <div class="authors">{@html joinAuthors(authors)}</div>
-                {#if at_page}
+                {#if !completed && pages}
                     <div class="pages">{pages} pages</div>
                 {/if}
             </div>
@@ -50,7 +55,7 @@
                 {/if}
                 {#if rating}
                     rated <i>{rating}</i>
-                {:else}
+                {:else if at_page}
                     currently on page <i>{at_page}</i>
                 {/if}
             </div>
@@ -60,14 +65,19 @@
 {/if}
 
 <style>
+    a {
+        all: unset;
+        cursor: pointer;
+    }
     main {
         height: 156px;
         margin: 0;
         top: 50%;
         background-color: #fff;
         box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
-        width: 304px;
-        min-width: 240px;
+        width: 63vw;
+        min-width: 320px;
+        max-width: 700px;
     }
 
     .container-outer {
@@ -92,28 +102,28 @@
         justify-content: space-between;
         align-items: flex-start;
         align-content: center;
-        width: 100%;
-        max-width: 195;
         flex-shrink: 4;
         flex-grow: 1;
+        width: calc(100% - 195px);
+    }
+
+    .cover-link {
+        align-self: center;
+        height: 195px;
     }
 
     .cover {
-        flex-shrink: 1;
         align-self: center;
-        justify-self: center;
-        width: 132px;
-        min-width: 128px;
-        height: 195px;
+        height: inherit;
         scale: 75%;
-        margin-left: -3.75%;
         object-fit: cover;
         object-position: center;
+        margin-left: -9px;
+        width: 120px;
     }
 
 
     .info {
-        margin-top: 5%;
         max-width: inherit;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -125,43 +135,49 @@
     .title {
         font-size: inherit;
         max-width: inherit;
-        text-overflow: inherit;
-        overflow: inherit;
+        text-overflow: ellipsis;
+        overflow: hidden;
         white-space: normal;
+        padding-top: 8px;
+        margin-bottom: 6px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
 
     .authors {
-        margin-top: 2%;
+        padding-bottom: 4px;
         font-size: 70%;
         font-weight: 400;
         line-height: 120%;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .pages {
         font-size: 66%;
         font-weight: 400;
         color: #8e8e8e;
-        margin-top: 6px;
     }
 
     .info-footer {
-        margin-bottom: 5%;
         font-size: 60%;
         font-weight: 400;
         color: #8e8e8e;
+        padding-bottom: 8px;
     }
 
     .label {
-        overflow: hidden;
+        overflow-x: hidden;
         text-align: center;
-        width: 304px;
-        min-width: 240px;
         font-size: 60%;
         font-weight: 400;
         color: #78403e;
+        width: 63vw;
+        display: block;
+        min-width: 320px;
+        max-width: 700px;
+        line-height: 100%;
     }
 
     .label:before,
@@ -173,6 +189,7 @@
         position: relative;
         vertical-align: middle;
         width: 50%;
+        line-height: 1px;
     }
 
 
