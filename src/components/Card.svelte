@@ -168,7 +168,7 @@
     }
 
     .label {
-        overflow: hidden;
+        overflow-x: hidden;
         text-align: center;
         font-size: 60%;
         font-weight: 400;
@@ -177,6 +177,7 @@
         display: block;
         min-width: 320px;
         max-width: 700px;
+        line-height: 100%;
     }
 
     .label:before,
@@ -188,6 +189,7 @@
         position: relative;
         vertical-align: middle;
         width: 50%;
+        line-height: 1px;
     }
 
 
