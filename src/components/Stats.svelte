@@ -18,19 +18,25 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
         };
     }
 </script>
-
+{#if public_data.thisYearTotal > 0}
 <div style="padding-top:20px">
     <div class="card" in:fadeBackground={{delay:600, duration:800}}>
         <Heatmap books_array={public_data.thisYear} />
     </div>
 </div>
+{/if}
 <div style="padding-top: 8px">
     <div class="card" in:fade={{delay: 600}}>
         <div class="stats-text">
+            {#if public_data.thisYearTotal > 0}
             So far {public_data.name} has read <b><i>{public_data.thisYearTotal}</i></b> book{public_data.thisYearTotal === 1 ? '' : 's' } this year.
             {#if public_data.thisYearTotal != public_data.completedTotal}
             <br>
+            <br>
                 That puts them at a {public_data.completedTotal > 9 ? 'grand ' : ''}total of <b><i>{public_data.completedTotal}</i></b> book{public_data.completedTotal === 1 ? '' : 's' } since they've started using <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>!
+            {/if}
+            {:else}
+                Since they've started using <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, {public_data.name} has read <b><i>{public_data.completedTotal}</i></b> book{public_data.completedTotal === 1 ? '' : 's' }.
             {/if}
         </div>
     </div>

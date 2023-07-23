@@ -1,6 +1,7 @@
 <script>
     import { fade, fly, scale } from 'svelte/transition';
     import public_data from '../assets/public_data.json'
+    import { cubicIn, quadOut } from 'svelte/easing';
 
     let heartVisible = false;
 
@@ -13,44 +14,42 @@
     }
 </script>
 
-<main transition:fade={{duration:750}}>
-    <h1>About</h1>
-    <p>
-        Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, this web-display was made with their help and support. So first of all a big <button on:click={showHeart}><i>thank you</i></button> to their team!
-    </p>
-    <p>
-        Their book-tracker is awesome and they're absolutely lovely folks, so if you haven't checked them out already, <a href="https://app.italictype.com/signup" target="_blank"><i>please do</i></a>.
-    </p>
-    <p>Hopefully, this little project will eventually become obsolete when they make this a native feature of their product.
-    </p>
-    <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <i>{public_data.name}</i> has been up to recently.
-    </p>
-    <h1>Contribute</h1>
-    <p>
-        This web-display was put together as a hobby project, so naturally there's lots of room for improvement!
-    </p>
-    <p>
-        It's built with <a href="https://svelte.dev/" target="_blank"><i>svelte</i></a>, <a href="https://vitejs.dev/" target="_blank"><i>vite</i></a>, and love – and you can check out the source code on <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a>.
-    </p>
-    <p>So if you're looking to suggest any changes, report a bug or even contribute some changes of your own, head on over there!
-    </p>
-    <h1>Get set up</h1>
-    <p>
-        On the <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a> page you'll also find instructions on how to set this display page up for your own <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a> account. It's fairly simple, so no worries!
-    </p>
-    <br>
-    <br>
-    <br>
-</main>
-
-{#if heartVisible}
-<div class="heart-container"  in:scale={{duration:700}} out:fade={{duration:500}}>
-    <svg viewBox="-20 -20 100 100">
-        <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" transform=""/>
-    </svg>
-</div>
-{/if}
-
+    <main transition:fade={{duration:750}}>
+        <h1>About</h1>
+        <p>
+            Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, this web-display was made with their help and support. So first of all a big <button on:click={showHeart}><i>thank you</i></button> to their team!
+        </p>
+        <p>
+            Their book-tracker is awesome and they're absolutely lovely folks, so if you haven't checked them out already, <a href="https://www.italictype.com/" target="_blank"><i>please do</i></a>.
+        </p>
+        <p>Hopefully, this little project will eventually become obsolete when they make this a native feature of their product.
+        </p>
+        <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <b><i>{public_data.name}</i></b> has been up to recently.
+        </p>
+        <h1>Contribute</h1>
+        <p>
+            This web-display was put together as a hobby project, so naturally there's lots of room for improvement!
+        </p>
+        <p>
+            It's built with <a href="https://svelte.dev/" target="_blank"><i>svelte</i></a>, <a href="https://vitejs.dev/" target="_blank"><i>vite</i></a>, and love – and you can check out the source code on <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a>.
+        </p>
+        <p>So if you're looking to suggest any changes, report a bug or even contribute some changes of your own, head on over there!
+        </p>
+        <h1>Get set up</h1>
+        <p>
+            On the <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a> page you'll also find instructions on how to set this display page up for your own <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a> account. It's fairly simple, so no worries!
+        </p>
+        <br>
+        <br>
+        <br>
+    </main>
+    {#if heartVisible}
+        <div class="heart-container"  in:scale={{duration:700}} out:fade={{duration:500}}>
+            <svg viewBox="-20 -20 100 100">
+                <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" transform=""/>
+            </svg>
+        </div>
+    {/if}
 
 <style>
     main {
@@ -104,8 +103,17 @@
         left: 0;
         height: 100vh;
         width: 100vw;
+        /* css magic to make heart not blurry */
+        /* https://slickmedia.io/blog/stop-blurring-jagged-edges-css-transform-transition */
+        outline: 1px solid transparent;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        will-change: transform;
+        perspective: hidden;
+        -webkit-perspective: 1000;
     }
-    
+
     svg {
         width: auto;
         height: auto;
@@ -114,6 +122,12 @@
     a {
         all: unset;
         cursor: pointer;
+        color: #bb6a3e;
+        font: inherit;
+        font-weight: 500;
+    }
+
+    b {
         color: #bb6a3e;
         font: inherit;
         font-weight: 500;
