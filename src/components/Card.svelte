@@ -77,7 +77,7 @@
         box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
         width: 63vw;
         min-width: 320px;
-        max-width: 700px;
+        max-width: 600px;
     }
 
     .container-outer {
@@ -176,7 +176,7 @@
         width: 63vw;
         display: block;
         min-width: 320px;
-        max-width: 700px;
+        max-width: 600px;
         line-height: 100%;
     }
 

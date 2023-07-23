@@ -47,7 +47,7 @@
     font-size: 1rem;
     border: none;
     border-radius: 50%;
-
+    cursor: pointer;
   }
 
   .back-to-top.hidden {
