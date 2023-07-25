@@ -68,7 +68,7 @@ function completed(arr) {
 }
 
 function current(arr) {
-    const filtered_arr = arr.map( x => {
+    let filtered_arr = arr.map( x => {
         const entry = {
             title : x.book.title,
             authors : x.book.authors,
@@ -79,6 +79,9 @@ function current(arr) {
         };
         return entry;
     });
+    if (filtered_arr.length > 0) {
+        filtered_arr = [{'separator' : true, 'label' : 'Currently'}, ...filtered_arr];
+    }
     return filtered_arr;
 }
 

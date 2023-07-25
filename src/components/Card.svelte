@@ -177,7 +177,7 @@
         display: block;
         min-width: 320px;
         max-width: 600px;
-        line-height: 100%;
+        line-height: 115%;
     }
 
     .label:before,

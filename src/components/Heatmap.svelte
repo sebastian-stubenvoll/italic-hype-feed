@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
-    import { quintOut } from 'svelte/easing';
+    import { quadOut, quintOut } from 'svelte/easing';
     import Rainbow from 'rainbowvis.js';
 
     export let books_array;
@@ -37,7 +37,7 @@
     {#each books_array as count, i (i)}
         <div class="div{i+1} item" style="z-index:2">
             {#if init}
-            <div in:fly={{y:15, delay:20*i, duration:900, easing:quintOut}}>
+            <div in:fly={{y:15, delay:20*i, duration:900, easing:quadOut}}>
                 <button class="rect" id="r{i+1}" title="{count} books" on:click={() => flip(["r",i+1].join(''))}>
                     <div class="front" style="background:{grad(count)}"></div>
                     <div class="back" style="color:{grad(count)}"><b>{count}</b></div>

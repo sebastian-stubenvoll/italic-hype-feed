@@ -21,13 +21,13 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
 <div transition:slide={{easing:quintOut, duration:800}}>
     {#if public_data.thisYearTotal > 0}
         <div style="padding-top:20px">
-            <div class="card hmap" in:fadeBackground={{delay:800, duration:800, fadeBG:true}}>
+            <div class="card hmap" in:fadeBackground={{delay:0, duration:1000, fadeBG:true}}>
                 <Heatmap books_array={public_data.thisYear} />
             </div>
         </div>
     {/if}
     <div style="padding-top: 8px">
-        <div class="card" in:fadeBackground={{delay:800, duration:800, fadeBG:false}}>
+        <div class="card" in:fadeBackground={{delay:0, duration:1000, fadeBG:false}}>
             <div class="stats-text">
                 {#if public_data.thisYearTotal > 0}
                     So far {public_data.name} has read <b><i>{public_data.thisYearTotal}</i></b> book{public_data.thisYearTotal === 1 ? '' : 's' } this year.
