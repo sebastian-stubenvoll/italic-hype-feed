@@ -7,7 +7,7 @@
     import Info from './components/Info.svelte';
     import public_data from './assets/public_data.json';
     import { onMount } from 'svelte';
-    import { fly } from 'svelte/transition';
+    import { fly, slide } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
     import Stats from './components/Stats.svelte';
 
@@ -36,6 +36,7 @@
         statsVisible.update((b) => !b);
     }
 
+
 </script>
 
 <div class="container" id="feed">
@@ -48,7 +49,9 @@
         </div>
     </button>
     {#if $statsVisible}
-        <Stats />
+        <div transition:slide={{duration:800}}>
+            <Stats />
+        </div>
     {/if}
     {#if init}
         {#each display as book}

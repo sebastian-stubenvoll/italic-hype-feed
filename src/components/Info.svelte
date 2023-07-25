@@ -1,7 +1,7 @@
 <script>
-    import { fade, fly, scale } from 'svelte/transition';
+    import { fade, fly, scale, slide } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
     import public_data from '../assets/public_data.json'
-    import { cubicIn, quadOut } from 'svelte/easing';
 
     let heartVisible = false;
 
@@ -14,7 +14,8 @@
     }
 </script>
 
-    <main transition:fade={{duration:750}}>
+    <main in:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut}} out:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut, delay:200}}>
+    <div in:fade={{delay:300, duration:700}} out:fade={{duration:200}}>
         <h1>About</h1>
         <p>
             Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, this web-display was made with their help and support. So first of all a big <button on:click={showHeart}><i>thank you</i></button> to their team!
@@ -26,6 +27,7 @@
         </p>
         <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <b><i>{public_data.name}</i></b> has been up to recently.
         </p>
+        <!--<p><i>This page was last updated on DATE</i></p>-->
         <h1>Contribute</h1>
         <p>
             This web-display was put together as a hobby project, so naturally there's lots of room for improvement!
@@ -42,6 +44,7 @@
         <br>
         <br>
         <br>
+    </div>
     </main>
     {#if heartVisible}
         <div class="heart-container"  in:scale={{duration:700}} out:fade={{duration:500}}>
