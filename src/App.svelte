@@ -104,7 +104,9 @@
     }
 
     .card {
-        margin-top: 8px;
+        /* the stats page adds a 8px div that is needed to not break
+           box shadow transitions. hence the margin can be applied to bottom */
+        margin-bottom: 8px;
     }
 
     .name {
