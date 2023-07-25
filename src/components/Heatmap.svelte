@@ -21,8 +21,15 @@
         return '#' + gradient.colourAt(count)
     }
 
+    function flip(id) {
+        console.log(id)
+        const el = document.getElementById(id);
+        el.classList.toggle('clicked');
+    }
+
     onMount(() => {
         init = true;
+
     });
 
 </script>
@@ -31,7 +38,10 @@
         <div class="div{i+1} item" style="z-index:2">
             {#if init}
             <div in:fly={{y:15, delay:20*i, duration:900, easing:quintOut}}>
-                <div class="rect" style="background:{grad(count)}" title="{count} books"></div>
+                <button class="rect" id="r{i+1}" title="{count} books" on:click={() => flip(["r",i+1].join(''))}>
+                    <div class="front" style="background:{grad(count)}"></div>
+                    <div class="back" style="color:{grad(count)}"><b>{count}</b></div>
+                </button>
             </div>
             {/if}
         </div>
@@ -84,6 +94,38 @@
     margin-left: 9px;
     margin-right: 9px;
     margin-bottom: 30px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+    background: transparent;
+}
+
+.rect.clicked {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    /* there's probably a more elegant way to do this */
+    margin-top: -18px;
+    width: inherit;
+    height: inherit;
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-top: 2px;
+    font: inherit;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
 .month {

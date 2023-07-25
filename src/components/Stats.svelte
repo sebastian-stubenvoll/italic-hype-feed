@@ -1,33 +1,33 @@
 <script>
     import Heatmap from './Heatmap.svelte';
     import public_data from '../assets/public_data.json';
-    import { cubicOut } from 'svelte/easing';
+    import { cubicOut, quintOut } from 'svelte/easing';
     import { slide } from 'svelte/transition';
 
-    function fadeBackground(node, {delay, duration}) {
+    function fadeBackground(node, {delay, duration, fadeBG}) {
         return {
             delay,
             duration,
             css: (t) => {
                 const eased = cubicOut(t);
                 return `
-background-color: rgba(255, 255, 255, ${eased});
+background-color: rgba(255, 255, 255, ${fadeBG ? eased : 1});
 box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
 `
             }
         };
     }
 </script>
-<!--<div transition:slide={{delay:200}}>-->
+<div transition:slide={{easing:quintOut, duration:800}}>
     {#if public_data.thisYearTotal > 0}
         <div style="padding-top:20px">
-            <div class="card" in:fadeBackground={{delay:600, duration:800}}>
+            <div class="card hmap" in:fadeBackground={{delay:800, duration:800, fadeBG:true}}>
                 <Heatmap books_array={public_data.thisYear} />
             </div>
         </div>
     {/if}
     <div style="padding-top: 8px">
-        <div class="card">
+        <div class="card" in:fadeBackground={{delay:800, duration:800, fadeBG:false}}>
             <div class="stats-text">
                 {#if public_data.thisYearTotal > 0}
                     So far {public_data.name} has read <b><i>{public_data.thisYearTotal}</i></b> book{public_data.thisYearTotal === 1 ? '' : 's' } this year.
@@ -42,7 +42,7 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
             </div>
         </div>
     </div>
-<!--</div>-->
+</div>
 
 <style>
     .stats-text {
@@ -66,6 +66,12 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
         width: 63vw;
         background-color: #fff;
         box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
+    }
+
+    .hmap {
+        /* the heatmap section needs to have a fixed height
+        or the svelte transition won't calculate properly */
+        height: 139px;
     }
 
     b {

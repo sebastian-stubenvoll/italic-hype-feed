@@ -49,9 +49,7 @@
         </div>
     </button>
     {#if $statsVisible}
-        <div transition:slide={{duration:800}}>
             <Stats />
-        </div>
     {/if}
     {#if init}
         {#each display as book}
