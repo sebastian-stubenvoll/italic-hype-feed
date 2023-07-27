@@ -1,6 +1,6 @@
 <script>
     import { fade, fly, scale } from 'svelte/transition';
-    import { quintOut } from 'svelte/easing';
+    import { quadIn, quintIn, quintOut } from 'svelte/easing';
     import public_data from '../assets/public_data.json'
 
     let heartVisible = false;
@@ -14,7 +14,7 @@
     }
 </script>
 
-    <main in:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut}} out:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut, delay:200}}>
+    <main in:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut}} out:fly={{duration:500, x:'-100vw', opacity: 100, easing:quadIn, delay:200}}>
     <div in:fade={{delay:300, duration:700}} out:fade={{duration:200}}>
         <h1>About</h1>
         <p>

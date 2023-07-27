@@ -24,6 +24,8 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
 
 <main transition:slide={{easing:quintOut, duration:slideDuration}}>
     {#if public_data.thisYearTotal > 0}
+            <!--needed so box-shadow doesn't get cut off in transition-->
+            <div style="height:15px" />
             <div class="card hmap" in:fadeBackground={{delay:0, duration:fadeDuration, fadeBG:true}}>
                 <Heatmap monthArray={public_data.thisYear} animationOffset={fadeDuration-400} />
             </div>

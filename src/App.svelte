@@ -124,7 +124,6 @@
         align-self: center;
         grid-row: 1;
         padding-left: 15px;
-        margin-bottom: 10px;
         text-align: left;
     }
 
