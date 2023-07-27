@@ -6,7 +6,6 @@
     }
 </script>
 
-
 <button class="info-button" on:click={toggleInfo}>
     {$infoVisible ? '✕' : '?'}
 </button>

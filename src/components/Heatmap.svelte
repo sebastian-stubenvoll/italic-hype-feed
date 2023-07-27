@@ -22,7 +22,6 @@
     }
 
     function flip(id) {
-        console.log(id)
         const el = document.getElementById(id);
         el.classList.toggle('clicked');
     }
@@ -33,7 +32,7 @@
     });
 
 </script>
-<div class="parent">
+<main>
     {#each books_array as count, i (i)}
         <div class="div{i+1} item" style="z-index:2">
             {#if init}
@@ -53,11 +52,11 @@
             </div>
         {/if}
     {/each}
-</div>
+</main>
 
 
 <style>
-.parent {
+main {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr);

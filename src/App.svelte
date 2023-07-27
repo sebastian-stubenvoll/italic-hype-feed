@@ -1,18 +1,23 @@
 <script>
-    import InfiniteLoading from 'svelte-infinite-loading';
+    //Data imports
     import { infoVisible, statsVisible } from './stores.js';
-    import Card from './components/Card.svelte';
+    import public_data from './assets/public_data.json';
+
+    //Component imports
+    import Book from './components/Book.svelte';
+    import Separator from './components/Separator.svelte';
+    import Stats from './components/Stats.svelte';
     import BackToTop from './components/BackToTop.svelte';
     import ShowInfo from './components/ShowInfo.svelte';
     import Info from './components/Info.svelte';
-    import public_data from './assets/public_data.json';
+    import InfiniteLoading from 'svelte-infinite-loading';
+
+    //Svelte functions
     import { onMount } from 'svelte';
-    import { fly, slide } from 'svelte/transition';
+    import { fly } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
-    import Stats from './components/Stats.svelte';
 
     let init = false;
-
     let display = [...public_data.current];
     
     function infiniteHandler( { detail : { loaded, complete } }) {
@@ -26,20 +31,18 @@
         }
     }
 
-    onMount( () => { init = true });
+    function toggleStats() {
+        statsVisible.update((b) => !b);
+    }
 
     infoVisible.subscribe((b) => {
         document.body.style.overflowY = b ? 'hidden' : 'visible';
     });
 
-    function toggleStats() {
-        statsVisible.update((b) => !b);
-    }
-
-
+    onMount( () => { init = true });
 </script>
 
-<div class="container" id="feed">
+<main>
     <button class="info-container stats-button" on:click={toggleStats}>
         <div>
             <img class="avatar" src="{public_data.avatar}" alt="avatar">
@@ -53,12 +56,18 @@
     {/if}
     {#if init}
         {#each display as book}
-            <div in:fly="{{ x: -50, duration: 1800, easing: cubicOut }}" class="card">
-                <Card {...book}/>
+            {#if book.separator}
+            <div class="card">
+                <Separator {...book}/>
             </div>
+            {:else}
+                <div in:fly="{{ x: -50, duration: 1800, easing: cubicOut }}" class="card">
+                    <Book {...book}/>
+                </div>
+            {/if}
         {/each}
     {/if}
-</div>
+            </main>
 
 {#if $infoVisible}
     <Info />
@@ -75,7 +84,7 @@
 
 
 <style>
-    .container {
+    main {
         margin: 0 auto;
         margin-top: 10px;
         width: 100%;

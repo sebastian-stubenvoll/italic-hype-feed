@@ -1,5 +1,5 @@
 <script>
-    import { fade, fly, scale, slide } from 'svelte/transition';
+    import { fade, fly, scale } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
     import public_data from '../assets/public_data.json'
 
@@ -27,7 +27,6 @@
         </p>
         <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <b><i>{public_data.name}</i></b> has been up to recently.
         </p>
-        <!--<p><i>This page was last updated on DATE</i></p>-->
         <h1>Contribute</h1>
         <p>
             This web-display was put together as a hobby project, so naturally there's lots of room for improvement!

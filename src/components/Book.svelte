@@ -1,4 +1,6 @@
 <script>
+  import Separator from './Separator.svelte';
+
     export let title = null;
     export let authors = null;
     export let cover = null;
@@ -6,8 +8,6 @@
     export let rating = null;
     export let at_page = null;
     export let pages = null;
-    export let separator = false;
-    export let label = null;
     export let url = 'https://www.italictype.com/';
 
     function joinAuthors(arr) {
@@ -31,9 +31,6 @@
 
 </script>
 
-{#if separator}
-    <div class="label">{label}</div>
-{:else}
 <main>
     <div class="container-outer">
         <a href="{url}" target="_blank" class="cover-link">
@@ -62,7 +59,6 @@
         </div>
     </div>
 </main>
-{/if}
 
 <style>
     a {
@@ -72,7 +68,6 @@
     main {
         height: 156px;
         margin: 0;
-        top: 50%;
         background-color: #fff;
         box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
         width: 63vw;
@@ -109,12 +104,14 @@
 
     .cover-link {
         align-self: center;
-        height: 195px;
+        height: 146.25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .cover {
-        align-self: center;
-        height: inherit;
+        height: calc(inherit * 1.3333);
         scale: 75%;
         object-fit: cover;
         object-position: center;
@@ -166,41 +163,4 @@
         color: #8e8e8e;
         padding-bottom: 8px;
     }
-
-    .label {
-        overflow-x: hidden;
-        text-align: center;
-        font-size: 60%;
-        font-weight: 400;
-        color: #78403e;
-        width: 63vw;
-        display: block;
-        min-width: 320px;
-        max-width: 600px;
-        line-height: 115%;
-    }
-
-    .label:before,
-    .label:after {
-        background-color: #78403e;
-        content: "";
-        display: inline-block;
-        height: 1px;
-        position: relative;
-        vertical-align: middle;
-        width: 50%;
-        line-height: 1px;
-    }
-
-
-    .label:before {
-        right: 0.5em;
-        margin-left: -50%;
-    }
-
-    .label:after {
-        left: 0.5em;
-        margin-right: -50%;
-    }
-
 </style>
