@@ -4,7 +4,8 @@
     import { quadOut, quintOut } from 'svelte/easing';
     import Rainbow from 'rainbowvis.js';
 
-    export let books_array;
+    export let monthArray;
+    export let animationOffset = 0;
 
     let init = false;
 
@@ -15,7 +16,7 @@
 
     let gradient = new Rainbow();
     gradient.setSpectrum('#e6e3e3', '#f25a30');
-    gradient.setNumberRange(0, Math.max(...books_array));
+    gradient.setNumberRange(0, Math.max(...monthArray));
 
     function grad(count) {
         return '#' + gradient.colourAt(count)
@@ -33,10 +34,10 @@
 
 </script>
 <main>
-    {#each books_array as count, i (i)}
+    {#each monthArray as count, i (i)}
         <div class="div{i+1} item" style="z-index:2">
             {#if init}
-            <div in:fly={{y:15, delay:20*i, duration:900, easing:quadOut}}>
+            <div in:fly={{y:15, delay:(20*i)+animationOffset, duration:900, easing:quadOut}}>
                 <button class="rect" id="r{i+1}" title="{count} books" on:click={() => flip(["r",i+1].join(''))}>
                     <div class="front" style="background:{grad(count)}"></div>
                     <div class="back" style="color:{grad(count)}"><b>{count}</b></div>
@@ -45,9 +46,9 @@
             {/if}
         </div>
     {/each}
-    {#each books_array as _, i (i)}
+    {#each monthArray as _, i (i)}
         {#if init}
-            <div class="div{i+1} item" style="z-index:1" in:fade={{delay:20*i+200, duration:900, easing:quintOut}}>
+            <div class="div{i+1} item" style="z-index:1" in:fade={{delay:(20*i)+animationOffset+200, duration:900, easing:quintOut}}>
                 <div class="month">{ months[i] }</div>
             </div>
         {/if}

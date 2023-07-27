@@ -4,6 +4,9 @@
     import { cubicOut, quintOut } from 'svelte/easing';
     import { slide } from 'svelte/transition';
 
+    const slideDuration = 1200;
+    const fadeDuration = 800;
+
     function fadeBackground(node, {delay, duration, fadeBG}) {
         return {
             delay,
@@ -18,14 +21,15 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
         };
     }
 </script>
-<div class="container" transition:slide={{easing:quintOut, duration:1200}}>
+
+<main transition:slide={{easing:quintOut, duration:slideDuration}}>
     {#if public_data.thisYearTotal > 0}
-            <div class="card hmap" in:fadeBackground={{delay:0, duration:800, fadeBG:true}} style="margin-top:20px">
-                <Heatmap books_array={public_data.thisYear} />
+            <div class="card hmap" in:fadeBackground={{delay:0, duration:fadeDuration, fadeBG:true}}>
+                <Heatmap monthArray={public_data.thisYear} animationOffset={fadeDuration-400} />
             </div>
     {/if}
     <div style="padding-top: 8px">
-        <div class="card" in:fadeBackground={{delay:0, duration:800, fadeBG:false}}>
+        <div class="card" in:fadeBackground={{delay:0, duration:fadeDuration, fadeBG:false}}>
             <div class="stats-text">
                 {#if public_data.thisYearTotal > 0}
                     So far {public_data.name} has read <b><i>{public_data.thisYearTotal}</i></b> book{public_data.thisYearTotal === 1 ? '' : 's' } this year.
@@ -42,10 +46,10 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * .08});
     </div>
     <!--needed so box-shadow doesn't get cut off in transition-->
     <div style="height:8px" />
-</div>
+</main>
 
 <style>
-    .container {
+    main {
         width: 70vw;
         min-width: 340px;
         display: flex;
