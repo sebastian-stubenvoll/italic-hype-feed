@@ -18,14 +18,19 @@
     <div in:fade={{delay:300, duration:700}} out:fade={{duration:200}}>
         <h1>About</h1>
         <p>
-            Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, this web-display was made with their help and support. So first of all a big <button on:click={showHeart}><i>thank you</i></button> to their team!
+            Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, 
+            this web-display was made with their help and support. So first of all a big
+            <button on:click={showHeart}><i>thank you</i></button> to their team!
         </p>
         <p>
-            Their book-tracker is awesome and they're absolutely lovely folks, so if you haven't checked them out already, <a href="https://www.italictype.com/" target="_blank"><i>please do</i></a>.
+            Their book-tracker is awesome and they're absolutely lovely folks, so if you haven't checked them out already, 
+            <a href="https://www.italictype.com/" target="_blank"><i>please do</i></a>.
         </p>
         <p>Hopefully, this little project will eventually become obsolete when they make this a native feature of their product.
         </p>
         <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <b><i>{public_data.name}</i></b> has been up to recently.
+            </p>
+        <p>Also you can click on their name or avatar to bring up some additional information!
         </p>
         <h1>Contribute</h1>
         <p>

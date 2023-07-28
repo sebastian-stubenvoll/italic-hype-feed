@@ -48,7 +48,7 @@
     {/each}
     {#each monthArray as _, i (i)}
         {#if init}
-            <div class="div{i+1} item" style="z-index:1" in:fade={{delay:(20*i)+animationOffset+200, duration:900, easing:quintOut}}>
+            <div class="div{i+1} item" style="z-index:1" in:fade={{delay:(20*i)+animationOffset+400, duration:900, easing:quintOut}}>
                 <div class="month">{ months[i] }</div>
             </div>
         {/if}
