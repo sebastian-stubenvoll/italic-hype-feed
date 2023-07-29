@@ -1,8 +1,14 @@
 const requests = require('./requests');
 const filters = require('./filters');
 const fs = require('fs');
+const e = require('./errors');
 
 const token = process.env.IT_TOKEN;
+if (token === undefined) {
+    const err = new e.TokenError("The token environment variable is not set.\nMake sure to set IT_TOKEN to your read-only API token before executing this script!")
+    console.log(err.message);
+    throw err;
+}
 
 
 async function update() {
