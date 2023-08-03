@@ -1,12 +1,12 @@
 <script>
-    import { fade, fly, scale } from 'svelte/transition';
-    import { quadIn, quintIn, quintOut } from 'svelte/easing';
-    import public_data from '../assets/public_data.json'
+    import { fade, fly, scale } from "svelte/transition";
+    import { quadIn, quintIn, quintOut } from "svelte/easing";
+    import public_data from "../assets/public_data.json";
 
     let heartVisible = false;
 
     function showHeart() {
-        console.log('♥');
+        console.log("♥");
         heartVisible = true;
         setTimeout(() => {
             heartVisible = false;
@@ -14,49 +14,97 @@
     }
 </script>
 
-    <main in:fly={{duration:1000, x:'-100vw', opacity: 100, easing:quintOut}} out:fly={{duration:500, x:'-100vw', opacity: 100, easing:quadIn, delay:200}}>
-    <div in:fade={{delay:300, duration:700}} out:fade={{duration:200}}>
+<main
+    in:fly={{ duration: 1000, x: "-100vw", opacity: 100, easing: quintOut }}
+    out:fly={{
+        duration: 500,
+        x: "-100vw",
+        opacity: 100,
+        easing: quadIn,
+        delay: 200,
+    }}
+>
+    <div in:fade={{ delay: 300, duration: 700 }} out:fade={{ duration: 200 }}>
         <h1>About</h1>
         <p>
-            Whilst not officially affiliated with <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a>, 
-            this web-display was made with their help and support. So first of all a big
+            Whilst not officially affiliated with <a
+                href="https://www.italictype.com/"
+                target="_blank"><i>Italic Type</i></a
+            >, this web-display was made with their help and support. So first
+            of all a big
             <button on:click={showHeart}><i>thank you</i></button> to their team!
         </p>
         <p>
-            Their book-tracker is awesome and they're absolutely lovely folks, so if you haven't checked them out already, 
-            <a href="https://www.italictype.com/" target="_blank"><i>please do</i></a>.
+            Their book-tracker is awesome and they're absolutely lovely folks,
+            so if you haven't checked them out already,
+            <a href="https://www.italictype.com/" target="_blank"
+                ><i>please do</i></a
+            >.
         </p>
-        <p>Hopefully, this little project will eventually become obsolete when they make this a native feature of their product.
+        <p>
+            Hopefully, this little project will eventually become obsolete when
+            they make this a native feature of their product.
         </p>
-        <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <i>{public_data.name ?? 'this booklover'}</i> has been up to recently.
-            </p>
-        <p>Also you can click on their name or avatar to bring up some additional information!
+        <p>
+            Meanwhile feel free to swing by here every now and then and check
+            out what literary adventures <i
+                >{public_data.name ?? "this booklover"}</i
+            > has been up to recently.
+        </p>
+        <p>
+            Also you can click on their name or avatar to bring up some
+            additional information!
         </p>
         <h1>Contribute</h1>
         <p>
-            This web-display was put together as a hobby project, so naturally there's lots of room for improvement!
+            This web-display was put together as a hobby project, so naturally
+            there's lots of room for improvement!
         </p>
         <p>
-            It's built with <a href="https://svelte.dev/" target="_blank"><i>svelte</i></a>, <a href="https://vitejs.dev/" target="_blank"><i>vite</i></a>, and love – and you can check out the source code on <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a>.
+            It's built with <a href="https://svelte.dev/" target="_blank"
+                ><i>svelte</i></a
+            >, <a href="https://vitejs.dev/" target="_blank"><i>vite</i></a>,
+            and love – and you can check out the source code on
+            <a
+                href="https://github.com/sebastian-stubenvoll/italic-hype-feed"
+                target="_blank"><i>github</i></a
+            >.
         </p>
-        <p>So if you're looking to suggest any changes, report a bug or even contribute some changes of your own, head on over there!
+        <p>
+            So if you're looking to suggest any changes, report a bug or even
+            contribute some changes of your own, head on over there!
         </p>
         <h1>Get set up</h1>
         <p>
-            On the <a href="https://github.com/sebastian-stubenvoll/italic-hype-feed" target="_blank"><i>github</i></a> page you'll also find instructions on how to set this display page up for your own <a href="https://www.italictype.com/" target="_blank"><i>Italic Type</i></a> account. It's fairly simple, so no worries!
+            On the <a
+                href="https://github.com/sebastian-stubenvoll/italic-hype-feed"
+                target="_blank"><i>github</i></a
+            >
+            page you'll also find instructions on how to set this display page
+            up for your own
+            <a href="https://www.italictype.com/" target="_blank"
+                ><i>Italic Type</i></a
+            > account. It's fairly simple, so no worries!
         </p>
-        <br>
-        <br>
-        <br>
+        <br />
+        <br />
+        <br />
     </div>
-    </main>
-    {#if heartVisible}
-        <div class="heart-container"  in:scale={{duration:700}} out:fade={{duration:500}}>
-            <svg viewBox="-20 -20 100 100">
-                <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" transform=""/>
-            </svg>
-        </div>
-    {/if}
+</main>
+{#if heartVisible}
+    <div
+        class="heart-container"
+        in:scale={{ duration: 700 }}
+        out:fade={{ duration: 500 }}
+    >
+        <svg viewBox="-20 -20 100 100">
+            <path
+                d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
+                transform=""
+            />
+        </svg>
+    </div>
+{/if}
 
 <style>
     main {

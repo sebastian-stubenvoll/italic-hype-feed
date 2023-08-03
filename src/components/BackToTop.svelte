@@ -1,12 +1,12 @@
 <script>
-    import { infoVisible } from '../stores.js';
-    import { fade } from 'svelte/transition';
+  import { infoVisible } from "../stores.js";
+  import { fade } from "svelte/transition";
 
   export let showOnPx = 150;
   let hidden = true;
 
   function goTop() {
-    window.scrollTo({ top : 0, behavior : 'smooth'});
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function scrollContainer() {
@@ -28,7 +28,12 @@
 
 <svelte:window on:scroll={handleOnScroll} />
 {#if !$infoVisible}
-<button transition:fade={{duration:250}} class="back-to-top" on:click={goTop} class:hidden>↑</button>
+  <button
+    transition:fade={{ duration: 250 }}
+    class="back-to-top"
+    on:click={goTop}
+    class:hidden>↑</button
+  >
 {/if}
 
 <style>
@@ -55,5 +60,3 @@
     visibility: hidden;
   }
 </style>
-
-

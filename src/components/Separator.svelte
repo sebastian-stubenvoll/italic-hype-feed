@@ -2,8 +2,8 @@
     export let label = null;
 </script>
 
-    <div class="label">{label}</div>
-    
+<div class="label">{label}</div>
+
 <style>
     .label {
         overflow-x: hidden;
@@ -30,7 +30,6 @@
         line-height: 1px;
     }
 
-
     .label:before {
         right: 0.5em;
         margin-left: -50%;
@@ -41,4 +40,3 @@
         margin-right: -50%;
     }
 </style>
-

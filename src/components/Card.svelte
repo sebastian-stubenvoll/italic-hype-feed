@@ -8,13 +8,16 @@
     export let pages = null;
     export let separator = false;
     export let label = null;
-    export let url = 'https://www.italictype.com/';
+    export let url = "https://www.italictype.com/";
 
     function joinAuthors(arr) {
-       if (arr.length < 4) {
-            return arr.join('<br>');
+        if (arr.length < 4) {
+            return arr.join("<br>");
         } else {
-            return arr.slice(0,2).join('<br>') + `<br><i>and ${arr.length - 2} others</i>`;
+            return (
+                arr.slice(0, 2).join("<br>") +
+                `<br><i>and ${arr.length - 2} others</i>`
+            );
         }
     }
 
@@ -23,45 +26,44 @@
         const day = event.getDate();
         const month = event.getMonth() + 1;
         const yearStr = event.getFullYear();
-        const dayStr = day < 10 ? '0' + day : day.toString();
-        const monthStr = month < 10 ? '0' + month : month.toString();
+        const dayStr = day < 10 ? "0" + day : day.toString();
+        const monthStr = month < 10 ? "0" + month : month.toString();
 
         return `${dayStr}.${monthStr}.${yearStr}`;
     }
-
 </script>
 
 {#if separator}
     <div class="label">{label}</div>
 {:else}
-<main>
-    <div class="container-outer">
-        <a href="{url}" target="_blank" class="cover-link">
-            <img class="cover" src="{cover}" alt="{title} cover">
-        </a>
-        <div class="container-inner">
-            <div class="info">
-                <a href="{url}" target="_blank">
-                    <div class="title" title="{title}">{title}</div>
-                </a>
-                <div class="authors">{@html joinAuthors(authors)}</div>
-                {#if !completed && pages}
-                    <div class="pages">{pages} pages</div>
-                {/if}
-            </div>
-            <div class="info-footer">
-                {#if completed}
-                    finished on <i>{humanDate(completed)}</i><br>
-                {/if}
-                {#if rating}
-                    rated <i>{rating}</i>
-                {:else if at_page}
-                    currently on page <i>{at_page}</i>
-                {/if}
+    <main>
+        <div class="container-outer">
+            <a href={url} target="_blank" class="cover-link">
+                <img class="cover" src={cover} alt="{title} cover" />
+            </a>
+            <div class="container-inner">
+                <div class="info">
+                    <a href={url} target="_blank">
+                        <div class="title" {title}>{title}</div>
+                    </a>
+                    <div class="authors">{@html joinAuthors(authors)}</div>
+                    {#if !completed && pages}
+                        <div class="pages">{pages} pages</div>
+                    {/if}
+                </div>
+                <div class="info-footer">
+                    {#if completed}
+                        finished on <i>{humanDate(completed)}</i><br />
+                    {/if}
+                    {#if rating}
+                        rated <i>{rating}</i>
+                    {:else if at_page}
+                        currently on page <i>{at_page}</i>
+                    {/if}
+                </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 {/if}
 
 <style>
@@ -74,7 +76,7 @@
         margin: 0;
         top: 50%;
         background-color: #fff;
-        box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
+        box-shadow: 0 0 20px 1px rgba(43, 36, 13, 0.08);
         width: 63vw;
         min-width: 320px;
         max-width: 700px;
@@ -121,7 +123,6 @@
         margin-left: -9px;
         width: 120px;
     }
-
 
     .info {
         max-width: inherit;
@@ -192,7 +193,6 @@
         line-height: 1px;
     }
 
-
     .label:before {
         right: 0.5em;
         margin-left: -50%;
@@ -202,5 +202,4 @@
         left: 0.5em;
         margin-right: -50%;
     }
-
 </style>

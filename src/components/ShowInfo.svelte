@@ -1,5 +1,5 @@
 <script>
-    import { infoVisible } from '../stores.js';
+    import { infoVisible } from "../stores.js";
 
     function toggleInfo() {
         infoVisible.update((b) => !b);
@@ -7,7 +7,7 @@
 </script>
 
 <button class="info-button" on:click={toggleInfo}>
-    {$infoVisible ? '✕' : '?'}
+    {$infoVisible ? "✕" : "?"}
 </button>
 
 <style>
@@ -29,5 +29,3 @@
         cursor: pointer;
     }
 </style>
-
-

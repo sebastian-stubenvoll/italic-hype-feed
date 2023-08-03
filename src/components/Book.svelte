@@ -1,5 +1,5 @@
 <script>
-  import Separator from './Separator.svelte';
+    import Separator from "./Separator.svelte";
 
     export let title = null;
     export let authors = null;
@@ -8,13 +8,16 @@
     export let rating = null;
     export let at_page = null;
     export let pages = null;
-    export let url = 'https://www.italictype.com/';
+    export let url = "https://www.italictype.com/";
 
     function joinAuthors(arr) {
-       if (arr.length < 4) {
-            return arr.join('<br>');
+        if (arr.length < 4) {
+            return arr.join("<br>");
         } else {
-            return arr.slice(0,2).join('<br>') + `<br><i>and ${arr.length - 2} others</i>`;
+            return (
+                arr.slice(0, 2).join("<br>") +
+                `<br><i>and ${arr.length - 2} others</i>`
+            );
         }
     }
 
@@ -23,23 +26,22 @@
         const day = event.getDate();
         const month = event.getMonth() + 1;
         const yearStr = event.getFullYear();
-        const dayStr = day < 10 ? '0' + day : day.toString();
-        const monthStr = month < 10 ? '0' + month : month.toString();
+        const dayStr = day < 10 ? "0" + day : day.toString();
+        const monthStr = month < 10 ? "0" + month : month.toString();
 
         return `${dayStr}.${monthStr}.${yearStr}`;
     }
-
 </script>
 
 <main>
     <div class="container-outer">
-        <a href="{url}" target="_blank" class="cover-link">
-            <img class="cover" src="{cover}" alt="{title} cover">
+        <a href={url} target="_blank" class="cover-link">
+            <img class="cover" src={cover} alt="{title} cover" />
         </a>
         <div class="container-inner">
             <div class="info">
-                <a href="{url}" target="_blank">
-                    <div class="title" title="{title}">{title}</div>
+                <a href={url} target="_blank">
+                    <div class="title" {title}>{title}</div>
                 </a>
                 <div class="authors">{@html joinAuthors(authors)}</div>
                 {#if !completed && pages}
@@ -48,7 +50,7 @@
             </div>
             <div class="info-footer">
                 {#if completed}
-                    finished on <i>{humanDate(completed)}</i><br>
+                    finished on <i>{humanDate(completed)}</i><br />
                 {/if}
                 {#if rating}
                     rated <i>{rating}</i>
@@ -69,7 +71,7 @@
         height: 156px;
         margin: 0;
         background-color: #fff;
-        box-shadow: 0 0 20px 1px rgba(43,36,13,.08);
+        box-shadow: 0 0 20px 1px rgba(43, 36, 13, 0.08);
         width: 63vw;
         min-width: 320px;
         max-width: 600px;
@@ -118,7 +120,6 @@
         margin-left: -9px;
         width: 120px;
     }
-
 
     .info {
         max-width: inherit;
