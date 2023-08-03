@@ -39,6 +39,11 @@
         document.body.style.overflowY = b ? 'hidden' : 'visible';
     });
 
+    if (public_data.background) {
+        const root = document.querySelector(':root')
+        root.style.backgroundColor = public_data.background;
+    }
+
     onMount( () => { init = true });
 </script>
 
@@ -48,7 +53,11 @@
             <img class="avatar" src="{public_data.avatar}" alt="avatar">
         </div>
         <div class="name">
-            {public_data.name}'{public_data.name.slice(-1) == 's' ? '' : 's'} recent reads
+            {#if !public_data.name}
+                An avid reader's recent reads
+            {:else}
+                {public_data.name}'{public_data.name.slice(-1) == 's' ? '' : 's'} recent reads
+            {/if}
         </div>
     </button>
     {#if $statsVisible}
@@ -58,7 +67,7 @@
         {#each display as book}
             {#if book.separator}
             <div class="card">
-                <Separator {...book}/>
+                <Separator label={book.label}/>
             </div>
             {:else}
                 <div in:fly="{{ x: -50, duration: 1800, easing: cubicOut }}" class="card">

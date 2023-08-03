@@ -1,6 +1,5 @@
 <script>
     export let label = null;
-
 </script>
 
     <div class="label">{label}</div>

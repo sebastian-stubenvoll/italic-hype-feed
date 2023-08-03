@@ -10,8 +10,7 @@ on:
 jobs:
   fetch-data:
     env: 
-      IT_USER: ${{ secrets.ITALIC_TYPE_USERNAME }}
-      IT_PASSWORD: ${{ secrets.ITALIC_TYPE_PASSWORD }}
+      IT_TOKEN: ${{ secrets.IT_TOKEN }}
 
     runs-on: ubuntu-latest
     steps:
@@ -46,8 +45,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
+      - name: Build project at custom base path
+        if: ${{ vars.BASE != '' }}
+        run: npm run build -- --base="${{ vars.BASE }}"
+
+      - name: Build project at default base path
+        if: ${{ vars.BASE == '' }}
+        run: npm run build -- --base="/italic-hype-feed/"
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
@@ -59,7 +63,6 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
@@ -72,4 +75,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: sebastian.hasbeenreading.xyz
+          cname: ${{ vars.CNAME }}

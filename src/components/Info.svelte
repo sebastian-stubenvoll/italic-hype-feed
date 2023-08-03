@@ -28,7 +28,7 @@
         </p>
         <p>Hopefully, this little project will eventually become obsolete when they make this a native feature of their product.
         </p>
-        <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <b><i>{public_data.name}</i></b> has been up to recently.
+        <p>Meanwhile feel free to swing by here every now and then and check out what literary adventures <i>{public_data.name ?? 'this booklover'}</i> has been up to recently.
             </p>
         <p>Also you can click on their name or avatar to bring up some additional information!
         </p>
@@ -80,6 +80,7 @@
     p {
         font: inherit;
         font-weight: 300;
+        font-size: 0.95rem;
     }
 
     button {
@@ -133,11 +134,4 @@
         font: inherit;
         font-weight: 500;
     }
-
-    b {
-        color: #bb6a3e;
-        font: inherit;
-        font-weight: 500;
-    }
-
 </style>

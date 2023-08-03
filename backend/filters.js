@@ -73,7 +73,7 @@ function current(arr) {
             title : x.book.title,
             authors : x.book.authors,
             cover : x.book.cover_image_url,
-            pages: x.book.page_count,
+            pages: x.adjusted_page_count ?? x.book.page_count,
             at_page: x.current_page_number,
             url: x.book.book_detail_url,
         };
@@ -83,6 +83,20 @@ function current(arr) {
         filtered_arr = [{'separator' : true, 'label' : 'Currently'}, ...filtered_arr];
     }
     return filtered_arr;
+}
+
+function removeProperty(data, property) {
+    data.current = data.current.map(x => {
+        x[property] && (x[property] = null);
+        return x;
+    });
+
+    data.completed = data.completed.map(x => {
+        x[property] && (x[property] = null);
+        return x;
+    });
+
+    return data;
 }
 
 const numbers = [ 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven' ]
@@ -110,4 +124,4 @@ function checkThisYear(d) {
     return null;
 }
 
-module.exports = { completed, current };
+module.exports = { completed, current, removeProperty };
