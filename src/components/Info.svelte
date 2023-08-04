@@ -1,6 +1,6 @@
 <script>
     import { fade, fly, scale } from "svelte/transition";
-    import { quadIn, quintIn, quintOut } from "svelte/easing";
+    import { quadIn, quintOut } from "svelte/easing";
     import public_data from "../assets/public_data.json";
 
     let heartVisible = false;
@@ -176,10 +176,10 @@
     }
 
     a {
-        all: unset;
         cursor: pointer;
         color: #bb6a3e;
         font: inherit;
         font-weight: 500;
+        text-decoration: none;
     }
 </style>

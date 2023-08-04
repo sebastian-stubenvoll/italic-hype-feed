@@ -68,9 +68,11 @@
 
 <style>
     a {
-        all: unset;
         cursor: pointer;
+        text-decoration: none;
+        color: unset;
     }
+
     main {
         height: 156px;
         margin: 0;

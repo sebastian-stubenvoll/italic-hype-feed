@@ -28,31 +28,48 @@
 
 <svelte:window on:scroll={handleOnScroll} />
 {#if !$infoVisible}
+<div class="container">
   <button
     transition:fade={{ duration: 250 }}
     class="back-to-top"
     on:click={goTop}
     class:hidden>↑</button
   >
+</div>
 {/if}
 
 <style>
-  .back-to-top {
-    opacity: 1;
-    transition: opacity 0.5s, visibility 0.5s;
+  .container {
     position: fixed;
     z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 40px;
+    width: 40px;
     right: 30px;
-    user-select: none;
     bottom: 20px;
+  }
+
+  .back-to-top {
+    font: inherit;
+    opacity: 1;
+    transition: opacity 0.5s, visibility 0.5s;
+    user-select: none;
     color: #fdfcfb;
     background-color: #bb6a3e;
-    width: 2rem;
-    height: 2rem;
+    width: inherit;
+    height: inherit;
     font-size: 1rem;
+    font-weight: 800;
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    text-align: center;
+    /* needed because iPhone Safari is a very funny browser */
+    padding: 0; 
+    margin: 0;
   }
 
   .back-to-top.hidden {

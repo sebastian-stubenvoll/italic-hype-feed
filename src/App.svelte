@@ -144,6 +144,7 @@
     .stats-button {
         border: none;
         box-shadow: none;
+        color: #000;
         font: inherit;
         background: none;
         cursor: pointer;

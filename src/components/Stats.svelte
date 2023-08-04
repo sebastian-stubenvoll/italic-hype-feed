@@ -129,10 +129,10 @@ box-shadow: 0 0 20px 1px rgba(43,36,13,${eased * 0.08});
     }
 
     a {
-        all: unset;
         cursor: pointer;
         color: #78403e;
         font: inherit;
         font-weight: 500;
+        text-decoration: none;
     }
 </style>
