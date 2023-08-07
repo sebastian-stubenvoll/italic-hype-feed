@@ -13,7 +13,7 @@ To do so follow these steps:
 1. Fork this repository
 2. Adjust `settings.json` for any data you want changed from the defaults.
     You can do this right here on github, if you don't want to clone the repo.
-    See the *settings* section under *advanced configuration* for more details.
+    See the *settings* section under *configuration* for more details.
 3. Under the repository settings navigate to `Secrets and variables -> Actions`
 4. Save your *Italic Type* read-only API token as a repository secret under the name `IT_TOKEN`.
    If you're unsure how to obtain this token see the *get your token* section.
@@ -52,14 +52,7 @@ Since you're inputting your login data, you should only send this request from t
 
 The response will contain your token, as well as some other basic user information, e.g. your *Italic Type* avatar URL, should you want to include that on your website.
 
-# Advanced configuration
-
-## Custom URLs
-The default configuration assumes you're hosting the page at `<yourgithubusername>.github.io/italic-hype-feed/`. If you're deploying at a different path, e.g. because you renamed the repository, you'll need to create a repository variable (not a secret!) called `BASE` (under `Settings -> Secrets and Variables -> Actions -> Variables`) to match your deployment path, e.g. `/my-changed-repo-name/` if you renamed the repo or `/` if you're using a custom domain.
-
-If you are using your own domain, you'll also want to add a repository variable called
-`CNAME` containing the *cname* record you used to setup your custom github pages
-domain, e.g. `my.domain.com`.
+# Configuration
 
 ## Settings
 In the root directory of this repository you'll find a file called `settings.json`. Should you want to customise the name or avatar shown on the display page you can adjust this file accordingly. E.g. changing its contents to
@@ -86,6 +79,13 @@ Any values that are not [truthy](https://developer.mozilla.org/en-US/docs/Glossa
 Also bear in mind that once requested, your filtered data will be part of your
 public commit history, **so if you want to hide data, adjust the settings before you
 enable github actions!**
+
+## Custom URLs
+The default configuration assumes you're hosting the page at `<yourgithubusername>.github.io/italic-hype-feed/`. If you're deploying at a different path, e.g. because you renamed the repository, you'll need to create a repository variable (not a secret!) called `BASE` (under `Settings -> Secrets and Variables -> Actions -> Variables`) to match your deployment path, e.g. `/my-changed-repo-name/` if you renamed the repo or `/` if you're using a custom domain.
+
+If you are using your own domain, you'll also want to add a repository variable called
+`CNAME` containing the *cname* record you used to setup your custom github pages
+domain, e.g. `my.domain.com`.
 
 # Embed this on your own website
 The layout for this web-display is fairly responsive, so you can easily embed
@@ -132,6 +132,10 @@ $ npm run dev # launches vite dev server
 # OR
 $ npm run build # builds the website at /dist/
 ```
+
+Known issues:
+
+- Safari animations aren't 100% working
 
 ---
 
