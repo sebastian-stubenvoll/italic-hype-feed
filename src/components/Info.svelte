@@ -86,9 +86,7 @@
                 ><i>Italic Type</i></a
             > account. It's fairly simple, so no worries!
         </p>
-        <br />
-        <br />
-        <br />
+        <div style="height:60px" />
     </div>
 </main>
 {#if heartVisible}
