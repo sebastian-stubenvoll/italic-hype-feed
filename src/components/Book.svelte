@@ -1,6 +1,4 @@
 <script>
-    import Separator from "./Separator.svelte";
-
     export let title = null;
     export let authors = null;
     export let cover = null;
