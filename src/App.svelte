@@ -54,19 +54,22 @@
         <div>
             <img class="avatar" src={public_data.avatar} alt="avatar" />
         </div>
-        <div class="name">
-            {#if !public_data.name}
-                An avid reader's recent reads
-            {:else}
-                {public_data.name}'{public_data.name.slice(-1) == "s"
-                    ? ""
-                    : "s"} recent reads
-            {/if}
+        <div class="rhs">
+            <div class="name">
+                {#if !public_data.name}
+                    An avid reader's recent reads
+                {:else}
+                    {public_data.name}'{public_data.name.slice(-1) == "s"
+                        ? ""
+                        : "s"} recent reads
+                {/if}
+            </div>
+            <div class="more">
+                    click to show {$statsVisible ? 'less' : 'more'}
+            </div>
         </div>
     </button>
-    {#if $statsVisible}
-        <Stats />
-    {/if}
+    <Stats />
     {#if init}
         {#each display as book}
             {#if book.separator}
@@ -114,7 +117,17 @@
         width: 63vw;
         min-width: 320px;
         max-width: 600px;
+        align-items: center;
     }
+
+    .rhs {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        text-align: left;
+        padding-left: 15px;
+    }
+
     .avatar {
         width: 60px;
         height: 60px;
@@ -137,8 +150,13 @@
         font-size: 150%;
         align-self: center;
         grid-row: 1;
-        padding-left: 15px;
-        text-align: left;
+    }
+
+    .more {
+        font-family: normal Lora, Times New Roman, Georgia, serif;
+        color: #8e8e8e;
+        font-weight: 400;
+        font-size: 0.7rem;
     }
 
     .stats-button {

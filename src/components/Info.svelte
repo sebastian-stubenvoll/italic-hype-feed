@@ -86,7 +86,10 @@
                 ><i>Italic Type</i></a
             > account. It's fairly simple, so no worries!
         </p>
-        <div style="height:60px" />
+        <!--invisible character hack to hopefully stop mobile browsers from optimising out the blank space-->
+        <div style="height:60px">
+            ‎
+        </div>
     </div>
 </main>
 {#if heartVisible}
