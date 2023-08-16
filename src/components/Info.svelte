@@ -5,7 +5,7 @@
 
     let heartVisible = false;
 
-    function showHeart() {
+    function love() {
         console.log("♥");
         heartVisible = true;
         setTimeout(() => {
@@ -32,7 +32,7 @@
                 target="_blank"><i>Italic Type</i></a
             >, this web-display was made with their help and support. So first
             of all a big
-            <button on:click={showHeart}><i>thank you</i></button> to their team!
+            <button on:click={love}><i>thank you</i></button> to their team!
         </p>
         <p>
             Their book-tracker is awesome and they're absolutely lovely folks,
@@ -90,10 +90,11 @@
     </div>
 </main>
 {#if heartVisible}
+    <!--somtimes flickers on safari?-->
     <div
         class="heart-container"
         in:scale={{ duration: 700 }}
-        out:fade={{ duration: 500 }}
+        out:fade={{ duration: 400 }}
     >
         <svg viewBox="-20 -20 100 100">
             <path
@@ -157,20 +158,24 @@
         left: 0;
         height: 100vh;
         width: 100vw;
+        visibility: visible;
+        pointer-events: none;
         /* css magic to make heart not blurry */
         /* https://slickmedia.io/blog/stop-blurring-jagged-edges-css-transform-transition */
         outline: 1px solid transparent;
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         transform: translateZ(0);
+        -webkit-transform: translate3d(0,0,0);
         will-change: transform;
         perspective: hidden;
         -webkit-perspective: 1000;
     }
 
     svg {
-        width: auto;
-        height: auto;
+        /* safari is a funny browser and won't show svg with height and width set to auto */
+        width: inherit;
+        height: inherit;
     }
 
     a {
