@@ -57,7 +57,7 @@
                     <button
                         class="rect"
                         id="r{i + 1}"
-                        title="{count} books"
+                        title="{count} book{count == 1 ? 's' : ''}"
                         on:click={() => flip(["r", i + 1].join(""))}
                     >
                         <div class="front" style="background:{grad(count)}" />
